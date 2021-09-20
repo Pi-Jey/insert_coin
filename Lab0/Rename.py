@@ -1,17 +1,12 @@
 import sys
 from Player import *
-from Enemy import *
+from Ghost import *
 
 pygame.init()
 vec = pygame.math.Vector2
 
 
-"""
-This is main class that describe an Application and its methods
-"""
-
-
-class App:
+class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.background = None
@@ -23,18 +18,13 @@ class App:
         self.walls = []
         self.dots = []
         self.teleports = []
-        self.enemies = []
+        self.ghosts = []
         self.e_pos = []
         self.p_pos = None
         self.load_map()
         self.player = Player(self, vec(self.p_pos))
 
     def start_game(self):
-        """
-        This is the main loop of game that controls game state and calls function to draw the contents
-        and/or functions that process the input events in game.
-        :return:
-        """
         while self.running:
             if self.state == MENU:
                 self.start_events()
@@ -56,16 +46,6 @@ class App:
         sys.exit()
 
     def draw_text(self, words, screen, pos, size, colour, font_name, centered=False):
-        """
-        Drawing the text with color, font, size and etc.
-        :param words: str - Text to draw
-        :param screen: Surface - The surface on which text will be painted)
-        :param pos: tuple(x,y) X and Y - screen positions of left top corner of test
-        :param size: int - Size of text
-        :param colour: tuple(R,G,B)
-        :param font_name: str - font name
-        :param centered: bool - need to draw the text in center or not. Default=FALSE
-        """
         font = pygame.font.SysFont(font_name, size)
         text = font.render(words, False, colour)
         text_size = text.get_size()
@@ -75,14 +55,7 @@ class App:
         screen.blit(text, pos)
 
     def load_map(self):
-        """
-        This method loads the map background and reads the map file,
-        that consists of WALLS, Dots, TELEPORTS,
-        ENEMIES' spawn and PLAYER`s spawn.
 
-        Also we create the list of VECTORS(int,int) that helps us to make main process of game
-        :return:
-        """
         self.background = pygame.image.load('./Game_data/Maze.png')
         self.background = pygame.transform.scale(self.background, (MAZE_WIDTH, MAZE_HEIGHT))
 
@@ -96,16 +69,12 @@ class App:
                     elif char == "P":
                         self.p_pos = [x_index, y_index]
                     elif char in ["1", "2", "3", "4"]:
-                        self.enemies.append(Enemy(self, [x_index, y_index]))
+                        self.ghosts.append(Ghost(self, [x_index, y_index]))
                         self.e_pos.append([x_index, y_index])
                     elif char == "T":
                         self.teleports.append(vec(x_index, y_index))
 
     def draw_grid(self):
-        """
-        Simple method to draw grid. Uses only for debug.
-        :return:
-        """
         for x in range(WIDTH//self.cell_width):
             pygame.draw.line(self.background, GREY, (x*self.cell_width, 0),
                              (x*self.cell_width, HEIGHT))
@@ -114,16 +83,12 @@ class App:
                              (WIDTH, x*self.cell_height))
 
     def reset(self):
-        """
-        This method allow to reset the game after lose or win
-        :return:
-        """
         self.player.lives = PLAYER_LIVES
         self.player.current_score = 0
         self.player.grid_pos = vec(self.player.starting_pos)
         self.player.pix_pos = self.player.get_pix_pos()
         self.player.direction *= 0
-        for enemy in self.enemies:
+        for enemy in self.ghosts:
             enemy.grid_pos = vec(enemy.position)
             enemy.pix_pos = enemy.get_pix_pos()
 
@@ -135,13 +100,7 @@ class App:
                         self.dots.append(vec(x_index, y_index))
         self.state = GAMING
 
-# This block of code describes an intro functions of game. Start screen and start screen's key inputs
-
     def start_events(self):
-        """
-        Method control the inputs. Press SCAPE to start play. ESC for exit
-        :return:
-        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -149,22 +108,12 @@ class App:
                 self.state = GAMING
 
     def start_draw(self):
-        """
-        Drawing the main menu.
-        :return:
-        """
         self.screen.fill(BLACK)
         self.draw_text('Press space to play', self.screen, [
                        WIDTH//2, HEIGHT//2], START_TEXT_SIZE, WHITE, START_FONT, centered=True)
         pygame.display.update()
 
-# This is the main block of code controls game process and gameplay
-
     def playing_events(self):
-        """
-        This method allows you to control in game player.
-        :return:
-        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -179,34 +128,22 @@ class App:
                     self.player.change_direction(vec(0, 1))
 
     def playing_update(self):
-        """
-        Updating the player and check is he winner. If he is game turn to winner state.
-        :return:
-        """
         if len(self.dots) == 0:
             self.state = WINNER
         self.player.update()
 
     def playing_draw(self):
-        """
-        This method draw main game scenes and update it.
-        :return:
-        """
         self.screen.fill(BLACK)
         self.screen.blit(self.background, (PADDING // 2, PADDING // 2))
         self.draw_dots()
         self.draw_text(f'SCORE: {self.player.current_score}',
                        self.screen, [WIDTH//2, 10], 20, WHITE, START_FONT, centered=True)
         self.player.draw()
-        for enemy in self.enemies:
+        for enemy in self.ghosts:
             enemy.draw()
         pygame.display.update()
 
     def remove_life(self):
-        """
-        This method control Player's lives and control moment of lose.
-        :return:
-        """
         self.player.lives -= 1
 
         if self.player.lives == 0:
@@ -216,15 +153,11 @@ class App:
             self.player.grid_pos = vec(self.player.starting_pos)
             self.player.pix_pos = self.player.get_pix_pos()
             self.player.direction *= 0
-            for enemy in self.enemies:
+            for enemy in self.ghosts:
                 enemy.grid_pos = vec(enemy.position)
                 enemy.pix_pos = enemy.get_pix_pos()
 
     def draw_dots(self):
-        """
-        Simple draw dots method.
-        :return:
-        """
         for dot in self.dots:
             pygame.draw.circle(self.screen, WHITE,
                                (int(dot.x*self.cell_width) + self.cell_width // 2 + PADDING // 2,
@@ -232,11 +165,6 @@ class App:
 
 # This block of code manages game over state of game
     def game_over_events(self):
-        """
-        Control inputs in 'Game over' state of game.
-        You can play again if you press Space or left game with pressing the ESC button
-        :return:
-        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -246,10 +174,6 @@ class App:
                 self.running = False
 
     def game_over_draw(self):
-        """
-        Draws game over screen.
-        :return:
-        """
         self.screen.fill(BLACK)
         quit_text = "Press the escape button to QUIT"
         again_text = "Press space to PLAY AGAIN"
@@ -260,13 +184,7 @@ class App:
                        WIDTH//2, HEIGHT//1.5],  36, GREY, "Sans Serif MS", centered=True)
         pygame.display.update()
 
-# This block of code manages an win state of game
     def winner_events(self):
-        """
-        Control inputs in 'WON' state of game.
-        You can play again if you press Space or left game with pressing the ESC button
-        :return:
-        """
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 temp_score = self.player.current_score
@@ -278,10 +196,6 @@ class App:
                 self.running = False
 
     def winner_draw(self):
-        """
-        Draws winner screen.
-        :return:
-        """
         self.screen.fill(BLACK)
         self.draw_text("You are WINNER!", self.screen, [
             WIDTH // 2, HEIGHT // 2 - 50], 36, YELLOW, 'Impact', centered=True)

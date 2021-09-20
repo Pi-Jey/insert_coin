@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bc124b50-7c08-4309-9d2a-206646c08986" name="Changes" comment="" />
+    <list default="true" id="bc124b50-7c08-4309-9d2a-206646c08986" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab0/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab0/Rename.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab0/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab0/Constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab0/Enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab0/Ghost.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab0/Game_data/Score.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab0/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab0/Player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab0/Start.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab0/Start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Ghost.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Game_data/Map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Game_data/Map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Game_data/Score.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab1/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Player.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +38,6 @@
   </component>
   <component name="RunManager">
     <configuration name="Start" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="insert_coin" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -35,6 +48,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Lab0/Start.py" />
       <option name="PARAMETERS" value="" />
@@ -54,14 +68,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1631987756251</updated>
-      <workItem from="1631987758036" duration="1040000" />
+      <workItem from="1631987758036" duration="3392000" />
+      <workItem from="1632131748717" duration="1949000" />
+      <workItem from="1632137738213" duration="37000" />
     </task>
+    <task id="LOCAL-00001" summary="beta">
+      <created>1631988909291</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1631988909291</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="beta" />
+    <option name="LAST_COMMIT_MESSAGE" value="beta" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/insert_coin$Start.coverage" NAME="Start Coverage Results" MODIFIED="1631988376560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab0" />
+    <SUITE FILE_PATH="coverage/insert_coin$Start.coverage" NAME="Start Coverage Results" MODIFIED="1632137759440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab1" />
   </component>
 </project>

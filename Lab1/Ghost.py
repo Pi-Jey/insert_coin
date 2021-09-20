@@ -5,42 +5,25 @@ import timeit
 import numpy as np
 import pygame
 from Constants import *
-vec = pygame.math.Vector2
-
 import queue
 
-class Enemy:
-    """
-    This class describe an Enemy class in Pacman game (Ghost).
-    Now it is only for add AFK enemy. All mob functional will be added later, in next labs.
-    """
+vec = pygame.math.Vector2
+
+
+class Ghost:
     def __init__(self, application, start_position):
         self.type = None
         self.application = application
         self.position = start_position
         self.pix_position = self.get_pix_pos()
         self.path = None
-        # self.exec_timer()
-        # self.path = self.UCS(vec(1, 1), vec(1, 25))
-        # self.path = self.BFS(vec(1, 1), vec(26, 9))
-        # self.path = self.DFS(vec(1, 1), vec(26, 9))
-        # self.path = self.BFS(vec(1, 1), vec(26, 9))
-
-
+        
     def draw(self):
-        """
-        Drawing the Ghost with some parameters, like color, position and size
-        :return:
-        """
         pygame.draw.circle(self.application.screen, RED,
                            (self.pix_position.x, self.pix_position.y),
                            self.application.cell_width//2-2)
 
     def get_pix_pos(self):
-        """
-        This method finds a pixel position of Ghost to make more easier to draw it on map.
-        :return: vector(x,y) where x is an X coordinate the center of Ghost. y - Y coordinate with same meaning.
-        """
         return vec((self.position[0]*self.application.cell_width) + PADDING // 2 + self.application.cell_width // 2,
                    (self.position[1]*self.application.cell_height) +
                    PADDING // 2 + self.application.cell_height // 2)
@@ -109,7 +92,6 @@ class Enemy:
             if stack[-1] == target:
                 return path
 
-
     def UCS(self, start, target):
         grid = self.load_grid()
         if not self.is_valid_target(target):
@@ -137,8 +119,6 @@ class Enemy:
                     q.put((step_cost + cost, next_node))
             path.append(q.queue[0][1][::-1])
 
-
-
     def grid_to_graph(self, grid):
         cost = 1
         rows, cols = grid.shape
@@ -155,7 +135,7 @@ class Enemy:
 
     def draw_path(self):
         for step in self.path[1:-1]:
-            pygame.draw.rect(self.application.screen, BLUE, (step[0] * self.application.cell_width + PADDING // 2,
+            pygame.draw.rect(self.application.screen, RED, (step[0] * self.application.cell_width + PADDING // 2,
                                                              step[1] * self.application.cell_height + PADDING // 2,
                                                              self.application.cell_width - 1,
                                                              self.application.cell_height - 1))

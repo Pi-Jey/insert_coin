@@ -1,9 +1,3 @@
-"""
-This file is intended for constants
- in game as size of window,
- colors of ghost or player and etc.
-"""
-
 # Screen constants
 WIDTH, HEIGHT = 610, 670
 FPS = 60

@@ -1,9 +1,3 @@
-"""
-This file is intended for constants
- in game as size of window,
- colors of ghost or player and etc.
-"""
-
 # Screen constants
 WIDTH, HEIGHT = 610, 670
 FPS = 60
@@ -24,7 +18,7 @@ BLUE = (0, 0, 255)
 
 # Font constants
 START_TEXT_SIZE = 36
-START_FONT = 'Sans Serif'
+START_FONT = 'Impact'
 
 # Game states
 MENU = 1
@@ -33,6 +27,8 @@ GAME_OVER = 3
 WINNER = 4
 
 # Player constants
-PLAYER_COLOUR = (255, 0, 0)
+PLAYER_COLOUR = (255, 255, 0)
 PLAYER_LIVES = 2
+
+
 
