@@ -1,5 +1,5 @@
 import sys
-from Player import *
+from Pacman import *
 from Ghost import *
 
 pygame.init()
@@ -22,7 +22,7 @@ class Game:
         self.e_pos = []
         self.p_pos = None
         self.load_map()
-        self.player = Player(self, vec(self.p_pos))
+        self.pacman = Pacman(self, vec(self.p_pos))
 
     def start_game(self):
         while self.running:
@@ -74,20 +74,12 @@ class Game:
                     elif char == "T":
                         self.teleports.append(vec(x_index, y_index))
 
-    def draw_grid(self):
-        for x in range(WIDTH//self.cell_width):
-            pygame.draw.line(self.background, GREY, (x*self.cell_width, 0),
-                             (x*self.cell_width, HEIGHT))
-        for x in range(HEIGHT//self.cell_height):
-            pygame.draw.line(self.background, GREY, (0, x*self.cell_height),
-                             (WIDTH, x*self.cell_height))
-
     def reset(self):
-        self.player.lives = PLAYER_LIVES
-        self.player.current_score = 0
-        self.player.grid_pos = vec(self.player.starting_pos)
-        self.player.pix_pos = self.player.get_pix_pos()
-        self.player.direction *= 0
+        self.pacman.lives = PACMAN_LIVES
+        self.pacman.current_score = 0
+        self.pacman.grid_pos = vec(self.pacman.starting_pos)
+        self.pacman.pix_pos = self.pacman.get_pix_pos()
+        self.pacman.direction *= 0
         for enemy in self.ghosts:
             enemy.grid_pos = vec(enemy.position)
             enemy.pix_pos = enemy.get_pix_pos()
@@ -119,40 +111,39 @@ class Game:
                 self.running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    self.player.change_direction(vec(-1, 0))
+                    self.pacman.change_direction(vec(-1, 0))
                 if event.key == pygame.K_RIGHT:
-                    self.player.change_direction(vec(1, 0))
+                    self.pacman.change_direction(vec(1, 0))
                 if event.key == pygame.K_UP:
-                    self.player.change_direction(vec(0, -1))
+                    self.pacman.change_direction(vec(0, -1))
                 if event.key == pygame.K_DOWN:
-                    self.player.change_direction(vec(0, 1))
+                    self.pacman.change_direction(vec(0, 1))
 
     def playing_update(self):
         if len(self.dots) == 0:
             self.state = WINNER
-        self.player.update()
+        self.pacman.update()
 
     def playing_draw(self):
         self.screen.fill(BLACK)
         self.screen.blit(self.background, (PADDING // 2, PADDING // 2))
         self.draw_dots()
-        self.draw_text(f'SCORE: {self.player.current_score}',
+        self.draw_text(f'SCORE: {self.pacman.current_score}',
                        self.screen, [WIDTH//2, 10], 20, WHITE, START_FONT, centered=True)
-        self.player.draw()
+        self.pacman.draw()
         for enemy in self.ghosts:
             enemy.draw()
         pygame.display.update()
 
     def remove_life(self):
-        self.player.lives -= 1
+        self.pacman.lives -= 1
 
-        if self.player.lives == 0:
-            self.write_score(self.player.current_score)
+        if self.pacman.lives == 0:
             self.state = GAME_OVER
         else:
-            self.player.grid_pos = vec(self.player.starting_pos)
-            self.player.pix_pos = self.player.get_pix_pos()
-            self.player.direction *= 0
+            self.pacman.grid_pos = vec(self.pacman.starting_pos)
+            self.pacman.pix_pos = self.pacman.get_pix_pos()
+            self.pacman.direction *= 0
             for enemy in self.ghosts:
                 enemy.grid_pos = vec(enemy.position)
                 enemy.pix_pos = enemy.get_pix_pos()
@@ -163,7 +154,6 @@ class Game:
                                (int(dot.x*self.cell_width) + self.cell_width // 2 + PADDING // 2,
                                 int(dot.y*self.cell_height) + self.cell_height // 2 + PADDING // 2), 4)
 
-# This block of code manages game over state of game
     def game_over_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -177,19 +167,19 @@ class Game:
         self.screen.fill(BLACK)
         quit_text = "Press the escape button to QUIT"
         again_text = "Press space to PLAY AGAIN"
-        self.draw_text("GAME OVER", self.screen, [WIDTH//2, 100],  52, RED, "Sans Serif MS", centered=True)
+        self.draw_text("GAME OVER", self.screen, [WIDTH//2, 100],  52, RED, START_FONT, centered=True)
         self.draw_text(again_text, self.screen, [
-                       WIDTH//2, HEIGHT//2],  36, GREY, "Sans Serif MS", centered=True)
+                       WIDTH//2, HEIGHT//2],  36, GREY, START_FONT, centered=True)
         self.draw_text(quit_text, self.screen, [
-                       WIDTH//2, HEIGHT//1.5],  36, GREY, "Sans Serif MS", centered=True)
+                       WIDTH//2, HEIGHT//1.5],  36, GREY, START_FONT, centered=True)
         pygame.display.update()
 
     def winner_events(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                temp_score = self.player.current_score
+                temp_score = self.pacman.current_score
                 self.reset()
-                self.player.current_score = temp_score
+                self.pacman.current_score = temp_score
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.running = False
             if event.type == pygame.QUIT:
@@ -197,9 +187,9 @@ class Game:
 
     def winner_draw(self):
         self.screen.fill(BLACK)
-        self.draw_text("You are WINNER!", self.screen, [
-            WIDTH // 2, HEIGHT // 2 - 50], 36, YELLOW, 'Impact', centered=True)
+        self.draw_text("CONGRATULATION", self.screen, [
+            WIDTH // 2, HEIGHT // 2 - 50], 36, YELLOW, START_FONT, centered=True)
         win_text = "Press space to PLAY AGAIN"
         self.draw_text(win_text, self.screen, [
-            WIDTH // 2, HEIGHT // 2], 36, YELLOW, 'Impact', centered=True)
+            WIDTH // 2, HEIGHT // 2], 36, YELLOW, START_FONT, centered=True)
         pygame.display.update()

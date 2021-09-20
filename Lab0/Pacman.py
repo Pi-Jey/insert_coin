@@ -3,7 +3,7 @@ from Constants import *
 vec = pygame.math.Vector2
 
 
-class Player:
+class Pacman:
     def __init__(self, application, pos):
         self.application = application
         self.starting_pos = [pos.x, pos.y]
@@ -14,7 +14,7 @@ class Player:
         self.able_to_move = True
         self.current_score = 0
         self.speed = 2
-        self.lives = PLAYER_LIVES
+        self.lives = PACMAN_LIVES
 
     def update(self):
         if self.able_to_move:
@@ -35,11 +35,11 @@ class Player:
         self.on_teleport()
 
     def draw(self):
-        pygame.draw.circle(self.application.screen, PLAYER_COLOUR, (int(self.pix_pos.x),
+        pygame.draw.circle(self.application.screen, PACMAN_COLOUR, (int(self.pix_pos.x),
                                                                     int(self.pix_pos.y)), self.application.cell_width // 2 - 2)
 
         for x in range(self.lives):
-            pygame.draw.circle(self.application.screen, GREEN, (30 + 20 * x, HEIGHT - 15), 7)
+            pygame.draw.circle(self.application.screen,YELLOW, (30 + 20 * x, HEIGHT - 15), 7)
 
     def on_dots(self):
         if self.grid_pos in self.application.dots:
