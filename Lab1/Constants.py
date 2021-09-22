@@ -27,8 +27,8 @@ GAME_OVER = 3
 WINNER = 4
 
 # Player constants
-PLAYER_COLOUR = (255, 255, 0)
-PLAYER_LIVES = 2
+PACMAN_COLOUR = (255, 255, 0)
+PACMAN_LIVES = 2
 
 
 

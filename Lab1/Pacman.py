@@ -1,9 +1,10 @@
 import pygame
 from Constants import *
+
 vec = pygame.math.Vector2
 
 
-class Player:
+class Pacman:
     def __init__(self, application, pos):
         self.application = application
         self.starting_pos = [pos.x, pos.y]
@@ -14,11 +15,11 @@ class Player:
         self.able_to_move = True
         self.current_score = 0
         self.speed = 2
-        self.lives = PLAYER_LIVES
+        self.lives = PACMAN_LIVES
 
     def update(self):
         if self.able_to_move:
-            self.pix_pos += self.direction*self.speed
+            self.pix_pos += self.direction * self.speed
         if self.is_in_bounds():
             if self.stored_direction is not None:
                 self.direction = self.stored_direction
@@ -28,26 +29,26 @@ class Player:
                             self.application.cell_width // 2) // self.application.cell_width + 1
         self.grid_pos[1] = (self.pix_pos[1] - PADDING +
                             self.application.cell_height // 2) // self.application.cell_height + 1
-        # print(self.grid_pos)
-        if self.on_dot():
-            self.eat_dot()
+        if self.on_dots():
+            self.eat_dots()
         if self.on_enemy():
             self.application.remove_life()
         self.on_teleport()
 
     def draw(self):
-        pygame.draw.circle(self.application.screen, PLAYER_COLOUR, (int(self.pix_pos.x),
-                                                                    int(self.pix_pos.y)), self.application.cell_width // 2 - 2)
+        pygame.draw.circle(self.application.screen, PACMAN_COLOUR, (int(self.pix_pos.x),
+                                                                    int(self.pix_pos.y)),
+                           self.application.cell_width // 2 - 2)
 
         for x in range(self.lives):
-            pygame.draw.circle(self.application.screen, GREEN, (30 + 20 * x, HEIGHT - 15), 7)
+            pygame.draw.circle(self.application.screen, YELLOW, (30 + 20 * x, HEIGHT - 15), 7)
 
-    def on_dot(self):
+    def on_dots(self):
         if self.grid_pos in self.application.dots:
             return True
         return False
 
-    def eat_dot(self):
+    def eat_dots(self):
         self.application.dots.remove(self.grid_pos)
         self.current_score += 1
 
@@ -67,7 +68,8 @@ class Player:
                 self.pix_pos = self.get_pix_pos()
 
     def on_enemy(self):
-        for enemy in self.application.enemies:
+
+        for enemy in self.application.ghosts:
             if enemy.position == self.grid_pos:
                 return True
 
@@ -89,6 +91,6 @@ class Player:
 
     def is_able_to_move(self):
         for wall in self.application.walls:
-            if vec(self.grid_pos+self.direction) == wall:
+            if vec(self.grid_pos + self.direction) == wall:
                 return False
         return True

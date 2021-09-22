@@ -1,11 +1,14 @@
 import asyncio
 import random
 import time
-import timeit
+
 import numpy as np
 import pygame
 from Constants import *
 import queue
+import time
+
+start_time = time.time()
 
 vec = pygame.math.Vector2
 
@@ -29,10 +32,10 @@ class Ghost:
                    PADDING // 2 + self.application.cell_height // 2)
 
     def BFS(self, start, target):
+        start_time = time.time();
         grid = self.load_grid()
-
         if not self.is_valid_target(target):
-            print("your goal is wall")
+            print("your targed is invalid")
             return [start]
         queue = [start]
         path = []
@@ -59,12 +62,15 @@ class Ghost:
                     target = step["Current"]
                     shortest.insert(0, step["Current"])
 
+        finish_time = time.time()
+        print("--- %s seconds ---" % (finish_time - start_time))
         return shortest
 
     def DFS(self, start, target):
+        start_time = time.time();
         grid = self.load_grid()
         if not self.is_valid_target(target):
-            print("your goal is wall")
+            print("your targed is invalid")
             return [start]
 
         stack = [start]
@@ -90,12 +96,15 @@ class Ghost:
                 break
 
             if stack[-1] == target:
+                finish_time = time.time()
+                print("--- %s seconds ---" % (finish_time - start_time))
                 return path
 
     def UCS(self, start, target):
+        start_time = time.time();
         grid = self.load_grid()
         if not self.is_valid_target(target):
-            print("your goal is wall")
+            print("your targed is invalid")
             return [start]
         graph = self.grid_to_graph(grid)
         visited = set()
@@ -109,6 +118,8 @@ class Ghost:
             cost, node = q.get()
             if node == target:
                 path.append(node)
+                finish_time = time.time()
+                print("--- %s seconds ---" % (finish_time - start_time))
                 return path
 
             for edge in graph[node]:
@@ -157,34 +168,3 @@ class Ghost:
             return False
         else:
             return True
-
-    def exec_timer(self):
-        ucs = []
-        bfs = []
-        dfs = []
-        for i in range(10):
-            start = np.random.randint(1, 25, (1, 2))[0]
-            target = np.random.randint(1, 25, (1, 2))[0]
-            start = vec(start[0], start[1])
-            target = vec(target[0], target[1])
-
-            if self.is_valid_target(start) and self.is_valid_target(target):
-                start_time = time.time()
-                for i in range(100):
-                    self.UCS(start, target)
-                ucs.append(time.time() - start_time)
-
-                start_time = time.time()
-                for i in range(100):
-                    self.BFS(start, target)
-                bfs.append(time.time() - start_time)
-
-                start_time = time.time()
-                for i in range(100):
-                    self.DFS(start, target)
-                dfs.append(time.time() - start_time)
-
-        print(f"Середній час виконання UCS = {np.mean(ucs)}")
-        print(f"Середній час виконання BFS = {np.mean(bfs)}")
-        print(f"Середній час виконання DFS = {np.mean(dfs)}")
-

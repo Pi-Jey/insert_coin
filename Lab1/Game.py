@@ -1,12 +1,12 @@
 import sys
-from Player import *
+from Pacman import *
 from Ghost import *
 
 pygame.init()
 vec = pygame.math.Vector2
 
 
-class App:
+class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.background = None
@@ -18,11 +18,11 @@ class App:
         self.walls = []
         self.dots = []
         self.teleports = []
-        self.enemies = []
+        self.ghosts = []
         self.e_pos = []
         self.p_pos = None
         self.load_map()
-        self.player = Player(self, vec(self.p_pos))
+        self.pacman = Pacman(self, vec(self.p_pos))
 
     def start_game(self):
         while self.running:
@@ -68,7 +68,7 @@ class App:
                     elif char == "P":
                         self.p_pos = [x_index, y_index]
                     elif char in ["1", "2", "3", "4"]:
-                        self.enemies.append(Ghost(self, [x_index, y_index]))
+                        self.ghosts.append(Ghost(self, [x_index, y_index]))
                         self.e_pos.append([x_index, y_index])
                     elif char == "T":
                         self.teleports.append(vec(x_index, y_index))
@@ -82,12 +82,12 @@ class App:
                              (WIDTH, x*self.cell_height))
 
     def reset(self):
-        self.player.lives = PLAYER_LIVES
-        self.player.current_score = 0
-        self.player.grid_pos = vec(self.player.starting_pos)
-        self.player.pix_pos = self.player.get_pix_pos()
-        self.player.direction *= 0
-        for ghost in self.enemies:
+        self.pacman.lives = PACMAN_LIVES_LIVES
+        self.pacman.current_score = 0
+        self.pacman.grid_pos = vec(self.pacman.starting_pos)
+        self.pacman.pix_pos = self.pacman.get_pix_pos()
+        self.pacman.direction *= 0
+        for ghost in self.ghosts:
             ghost.grid_pos = vec(ghost.position)
             ghost.pix_pos = ghost.get_pix_pos()
 
@@ -120,53 +120,53 @@ class App:
                 self.running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    self.player.change_direction(vec(-1, 0))
+                    self.pacman.change_direction(vec(-1, 0))
                 if event.key == pygame.K_RIGHT:
-                    self.player.change_direction(vec(1, 0))
+                    self.pacman.change_direction(vec(1, 0))
                 if event.key == pygame.K_UP:
-                    self.player.change_direction(vec(0, -1))
+                    self.pacman.change_direction(vec(0, -1))
                 if event.key == pygame.K_DOWN:
-                    self.player.change_direction(vec(0, 1))
+                    self.pacman.change_direction(vec(0, 1))
 
     def playing_update(self):
         if len(self.dots) == 0:
             self.state = WINNER
-        self.player.update()
+        self.pacman.update()
 
     def playing_draw(self):
         self.screen.fill(BLACK)
         self.screen.blit(self.background, (PADDING // 2, PADDING // 2))
         self.draw_dots()
-        self.draw_text(f'SCORE: {self.player.current_score}',
+        self.draw_text(f'SCORE: {self.pacman.current_score}',
                        self.screen, [WIDTH//2, 10], 20, WHITE, START_FONT, centered=True)
-        self.player.draw()
-        for ghost in self.enemies:
+        self.pacman.draw()
+        for ghost in self.ghosts:
             ghost.draw()
         pygame.display.update()
 
     def playing_draw(self):
         self.screen.fill(BLACK)
         self.screen.blit(self.background, (PADDING // 2, PADDING // 2))
-        self.player.draw()
-        for ghost in self.enemies:
+        self.pacman.draw()
+        for ghost in self.ghosts:
             ghost.draw()
-            ghost.path = ghost.BFS(vec(ghost.position), self.player.grid_pos)
-            # ghost.path = ghost.DFS(vec(ghost.position), self.player.grid_pos)
-            # ghost.path = ghost.UCS(vec(ghost.position), self.player.grid_pos)
+            ghost.path = ghost.BFS(vec(ghost.position), self.pacman.grid_pos)
+            # ghost.path = ghost.DFS(vec(ghost.position), self.pacman.grid_pos)
+            # ghost.path = ghost.UCS(vec(ghost.position), self.pacman.grid_pos)
             ghost.draw_path()
         pygame.display.update()
 
     def remove_life(self):
-        self.player.lives -= 1
+        self.pacman.lives -= 1
 
-        if self.player.lives == 0:
-            self.write_score(self.player.current_score)
+        if self.pacman.lives == 0:
+            self.write_score(self.pacman.current_score)
             self.state = GAME_OVER
         else:
-            self.player.grid_pos = vec(self.player.starting_pos)
-            self.player.pix_pos = self.player.get_pix_pos()
-            self.player.direction *= 0
-            for ghost in self.enemies:
+            self.pacman.grid_pos = vec(self.pacman.starting_pos)
+            self.pacman.pix_pos = self.pacman.get_pix_pos()
+            self.pacman.direction *= 0
+            for ghost in self.ghosts:
                 ghost.grid_pos = vec(ghost.position)
                 ghost.pix_pos = ghost.get_pix_pos()
 
@@ -196,13 +196,12 @@ class App:
                        WIDTH//2, HEIGHT//1.5],  36, GREY, "Sans Serif MS", centered=True)
         pygame.display.update()
 
-# This block of code manages an win state of game
     def winner_events(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                temp_score = self.player.current_score
+                temp_score = self.pacman.current_score
                 self.reset()
-                self.player.current_score = temp_score
+                self.pacman.current_score = temp_score
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.running = False
             if event.type == pygame.QUIT:
