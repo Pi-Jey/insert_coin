@@ -3,16 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="bc124b50-7c08-4309-9d2a-206646c08986" name="Changes" comment="beta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lab1/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lab1/Ghost.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Ghost.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Pacman.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab1/Start.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab1/Start.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,10 +31,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Lab1/Start.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
-    <configuration name="Start" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Algo">
+    <configuration name="Algo" type="PythonConfigurationType" factoryName="Python">
       <module name="insert" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -38,12 +42,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\User\AppData\Local\Programs\Python\Python38\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Lab1" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Lab2" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Lab1/Start.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Lab2/Start.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -52,6 +56,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Start" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="insert" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\User\AppData\Local\Programs\Python\Python38\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Lab0" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Lab0/Start.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Start" />
+      <item itemvalue="Python.Algo" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -65,7 +95,15 @@
       <workItem from="1632131748717" duration="1949000" />
       <workItem from="1632137738213" duration="37000" />
       <workItem from="1632139022513" duration="14000" />
-      <workItem from="1632139354823" duration="16174000" />
+      <workItem from="1632139354823" duration="19472000" />
+      <workItem from="1632433676171" duration="229000" />
+      <workItem from="1633956239471" duration="311000" />
+      <workItem from="1634035705553" duration="3309000" />
+      <workItem from="1634209215523" duration="1405000" />
+      <workItem from="1634383104498" duration="4182000" />
+      <workItem from="1634479193491" duration="3103000" />
+      <workItem from="1634646426080" duration="12398000" />
+      <workItem from="1635155212859" duration="10586000" />
     </task>
     <task id="LOCAL-00001" summary="beta">
       <created>1631988909291</created>
@@ -81,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632180392889</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="beta">
+      <created>1632268906636</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1632268906636</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -92,6 +137,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="beta" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/insert_coin$Start.coverage" NAME="Start Coverage Results" MODIFIED="1632268619005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab1" />
+    <SUITE FILE_PATH="coverage/insert_coin$Start.coverage" NAME="Start Coverage Results" MODIFIED="1632291616233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab0" />
+    <SUITE FILE_PATH="coverage/insert_coin$Algo.coverage" NAME="Algo Coverage Results" MODIFIED="1635293518696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab2" />
   </component>
 </project>
