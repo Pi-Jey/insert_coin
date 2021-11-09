@@ -21,7 +21,7 @@ class Player:
         self.destination = DESTINATION
         self.points = self.generate_4_points()
         self.c = None
-        self.path, self.c = self.way_through_4_points()
+        self.path, self.c = self.way_through_all_points()
 
     def update(self):
         if self.able_to_move:
@@ -40,7 +40,7 @@ class Player:
 
             start = (int(self.grid_pos[1]), int(self.grid_pos[0]))
             end = self.destination
-            self.path, self.c = self.way_through_4_points()
+            self.path, self.c = self.way_through_all_points()
 
         if self.on_coin():
             self.eat_coin()
@@ -103,7 +103,7 @@ class Player:
             for i in range(j + 1, len(points)):
                 point1 = (int(points[j][0]), int(points[j][1]))
                 point2 = (int(points[i][0]), int(points[i][1]))
-                temp_routs.append(a_star(self.game.grid_map, point1, point2, euclid_heuristic, 0))
+                temp_routs.append(a_star(self.game.grid_map, point1, point2, greedy_heuristic, 0))
             routs += min(temp_routs, key=len)
 
         return routs, points
