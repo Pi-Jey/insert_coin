@@ -20,13 +20,13 @@ model.fit(train_x, train_y)
 
 predict = model.predict(test_x)
 
-print("Точність моделі: ", accuracy_score(test_y, predict))
+print("Accuracy of the model:", accuracy_score(test_y, predict))
 
 next_5_games_algo = np.array([1, 1, 1, 2, 2]).reshape(-1, 1)
 
 predict_for_next_games = model.predict(next_5_games_algo)
 predict_for_next_games_prob = model.predict_proba(next_5_games_algo)
 for i in range(len(predict_for_next_games)):
-    result = "Поразка" if predict_for_next_games[i] == 0 else ""
-    print(f"Очікувані результати гри №{i}: {result},\n \t ймовірність виграти = {predict_for_next_games_prob[i][1]}\n"
-          f" \t ймовірність програти = {predict_for_next_games_prob[i][0]}")
+    result = "Lose" if predict_for_next_games[i] == 0 else "Win"
+    print(f"Expected results of the game № №{i}: {result},\n \t probability of winning = {predict_for_next_games_prob[i][1]}\n"
+          f" \t probability of losing = {predict_for_next_games_prob[i][0]}")

@@ -1,4 +1,6 @@
-sbcl --load quicklisp.lisp
+sbcl 
+(load "quicklisp.lisp") 
+(quicklisp-quickstart:install)
 (ql:quickload "cl-csv")
 (defparameter data (cl-csv:read-csv #P"results.csv"))
 (defparameter saved-cols
