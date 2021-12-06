@@ -131,7 +131,6 @@ class Game:
             play_time = time.time() - self.start_time
             with open("results.csv", "a") as file:
                 file.write(f"{self.pacman.algo},{self.pacman.current_score},{play_time},win\n")
-
             self.state = WINNER
         self.pacman.update()
 
@@ -140,10 +139,9 @@ class Game:
         self.screen.blit(self.background, (PADDING // 2, PADDING // 2))
         self.draw_coins()
         self.draw_walls()
-        self.draw_text(f'CURRENT SCORE: {self.pacman.current_score}',
-                       self.screen, [60, 0], 36, WHITE, START_FONT)
+        self.draw_text(f'SCORE: {self.pacman.current_score}',
+                       self.screen, [270, 0], 18, WHITE, START_FONT)
         self.pacman.draw()
-        # self.player.draw_path()
         for enemy in self.enemies:
             enemy.update()
             enemy.draw()
@@ -156,9 +154,6 @@ class Game:
             with open("results.csv", "a") as file:
                 play_time = time.time() - self.start_time
                 file.write(f"{self.pacman.algo},{self.pacman.current_score},{play_time},lose\n")
-            if self.pacman.current_score > self.high_score:
-                self.high_score = self.pacman.current_score
-            self.write_score(self.pacman.current_score)
             self.state = GAME_OVER
         else:
             self.pacman.grid_pos = vec(self.pacman.starting_pos)
@@ -208,9 +203,9 @@ class Game:
         again_text = "Press space to PLAY AGAIN"
         self.draw_text("GAME OVER", self.screen, [WIDTH//2, 100],  52, RED, "Sans Serif MS", centered=True)
         self.draw_text(again_text, self.screen, [
-                       WIDTH//2, HEIGHT//2],  36, GREY, "Sans Serif MS", centered=True)
+                       WIDTH//2, HEIGHT//2],  36, GREY, "Impact", centered=True)
         self.draw_text(quit_text, self.screen, [
-                       WIDTH//2, HEIGHT//1.5],  36, GREY, "Sans Serif MS", centered=True)
+                       WIDTH//2, HEIGHT//1.5],  36, GREY, "Impact", centered=True)
         pygame.display.update()
 
     def winner_events(self):
@@ -227,10 +222,10 @@ class Game:
     def winner_draw(self):
         self.screen.fill(BLACK)
         self.draw_text("You are WINNER!", self.screen, [
-            WIDTH // 2, HEIGHT // 2 - 50], 36, GREEN, "Sans Serif MS", centered=True)
+            WIDTH // 2, HEIGHT // 2 - 50], 36, GREEN, "Impact", centered=True)
         win_text = "Press space to PLAY AGAIN"
         self.draw_text(win_text, self.screen, [
-            WIDTH // 2, HEIGHT // 2], 36, GREEN, "Sans Serif MS", centered=True)
+            WIDTH // 2, HEIGHT // 2], 36, GREEN, "Impact", centered=True)
         pygame.display.update()
 
     def get_state(self) -> GameState:

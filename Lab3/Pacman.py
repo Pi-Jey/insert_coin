@@ -22,7 +22,7 @@ class Pacman:
         self.lives = PACMAN_LIVES
         self.destination = DESTINATION
         self.target_coin = None
-        self.algo = EXPECT
+        self.algo = MINMAX
 
     def update(self):
 
@@ -39,9 +39,6 @@ class Pacman:
         if new_pos != self.grid_pos:
             self.old_grid_pos = self.grid_pos
             self.grid_pos = new_pos
-
-            # self.path = a_star(self.application.grid_map, start, end, take_all_coins_heuristic, self.application.coins)
-            # self.path, self.c = self.way_through_all_points()
 
         if self.on_coin():
             self.eat_coin()
@@ -158,24 +155,6 @@ class Pacman:
                     score += prob * score
             return score
         return maximize(self.application.get_state(),0)
-
-
-    def minmax(self):
-        curr_score = -1000
-        directions = [(-1, 0), (1, 0), (0, 1), (0, -1), (0, 0)]
-        allowed_directions = []
-        for direction in directions:
-            if vec(self.grid_pos[0] + direction[0], self.grid_pos[1] + direction[1]) not in self.application.walls:
-                allowed_directions.append(direction)
-        scores = []
-        for direction in allowed_directions:
-            scores.append(self.get_score(direction))
-        step_index = 0
-        for i in range(len(scores)):
-            if scores[i] >= curr_score:
-                curr_score = scores[i]
-                step_index = i
-        return vec(allowed_directions[step_index])
 
     def grab_coin(self):
         coins = []

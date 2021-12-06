@@ -36,7 +36,7 @@ WINNER = 4
 
 # Player constants
 PACMAN_COLOUR = YELLOW
-PACMAN_LIVES = 3
+PACMAN_LIVES = 1
 DESTINATION = (29, 29)
 
 # Enemy constants
@@ -55,5 +55,5 @@ PASSAGE = 0
 COINS_AMOUNT = 10
 
 
-MINMAX = 1
-EXPECT = 2
+MINMAX = "minmax"
+EXPECT = "expectimax"
